@@ -30,9 +30,10 @@ BAUD = 115200
 CH340_VID = 0x1A86          # WCH, maker of the CH340
 DEFAULT_DEVICE = "USB PnP"  # how Windows names the Pro's audio device
 
-# Commands from the Pro's current firmware (your ChipIntelli build
-# sfw2025111401393371252406, CI1302_英文_单麦_V00916_UART0_115200_2M.bin),
-# taken from its command table "Command Word Broadcasting Protocol List_251113-1003".
+# Commands from the Pro's command table, kept in sync with
+# firmware/Command Word Broadcasting Protocol List_251108-claw.xlsx in this repo.
+# Codes up to 0D FF are in the current build sfw2025111401393371252406;
+# the 0E claw codes need a new build from the updated spreadsheet.
 # Keyed by the two middle bytes of each frame: AA 55 <b2> <b3> FB.
 # Each entry is (command word, spoken reply). Edit the replies freely.
 RESPONSES = {
@@ -142,6 +143,13 @@ RESPONSES = {
     (0x0D, 0x00): ('START-OBJECT-TRACKING', 'Start object tracking'),
     (0x0D, 0x01): ('PICK-COLOR', 'Color identified'),
     (0x0D, 0xFF): ('END-OBJECT-TRACKING', 'Complete'),
+    # Claw commands (added Nov 8; need a new firmware build to be recognized)
+    (0x0E, 0x00): ('OPEN-THE-CLAW', 'Opening the claw'),
+    (0x0E, 0x01): ('CLOSE-THE-CLAW', 'Closing the claw'),
+    (0x0E, 0x02): ('RAISE-THE-CLAW', 'Raising the claw'),
+    (0x0E, 0x03): ('LOWER-THE-CLAW', 'Lowering the claw'),
+    (0x0E, 0x04): ('EXTEND-THE-CLAW', 'Extending the claw'),
+    (0x0E, 0x05): ('RETRACT-THE-CLAW', 'Retracting the claw'),
 }
 
 # Codes that also change the speaking volume.

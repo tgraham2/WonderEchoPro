@@ -13,6 +13,10 @@ Flash a **communication-UART0** image. On the Pro, the CH340 USB port is wired t
 
 Current build: `CI1302_英文_单麦_V00916_UART0_115200_2M.bin` from ChipIntelli build `sfw2025111401393371252406` (1,777,145 bytes). Its command table is `Command Word Broadcasting Protocol List_251113-1003 (1).xlsx`.
 
+Next build: upload `firmware/Command Word Broadcasting Protocol List_251108-claw.xlsx` to the ChipIntelli platform. It adds six claw commands (codes `AA 55 0E 00 FB` to `AA 55 0E 05 FB`): OPEN-THE-CLAW, CLOSE-THE-CLAW, RAISE-THE-CLAW, LOWER-THE-CLAW, EXTEND-THE-CLAW, RETRACT-THE-CLAW.
+
+Keep the spreadsheet in `firmware/` as the master copy. When it changes, update `RESPONSES` in the script to match, rebuild, and keep each build's `.bin`, `readme.txt` and spreadsheet together.
+
 Flashing with `PACK_UPDATE_TOOL.exe` (Windows):
 
 1. Chip **CI1302**, page **Firmware Upgrade**, select the `.bin`.
